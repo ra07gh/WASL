@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>بحث عن المفقودات</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet"/>
+  <style>
+    body {
+      font-family: 'Cairo', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #fff;
+    }
+
+    .navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px 40px;
+  height: 80px;
+  border-bottom: 1px solid #ccc;
+}
+
+
+    .navbar img {
+  width: 100px;
+  height: auto;
+}
+
+
+    .nav-links {
+      display: flex;
+      gap: 40px;
+      font-size: 16px;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: black;
+      font-weight: 700;
+    }
+
+    .nav-links a.active {
+      color: #0c4b44;
+    }
+
+    .logout {
+      border: 1px solid #000;
+      padding: 5px 10px;
+      border-radius: 6px;
+      text-decoration: none;
+      color: black;
+      font-size: 14px;
+    }
+
+    .search-container {
+      text-align: center;
+      margin: 30px auto 10px;
+    }
+
+    .search-container input {
+      padding: 10px;
+      width: 300px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+    }
+
+    .filters {
+      text-align: center;
+      margin: 10px;
+    }
+
+    .filters button {
+      margin: 5px;
+      padding: 8px 16px;
+      font-size: 14px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      background-color: #eee;
+    }
+
+    .filters button.active {
+      background-color: #0c4b44;
+      color: white;
+    }
+
+    .card-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      padding: 20px;
+    }
+
+    .card {
+      width: 220px;
+      border: 1px solid #ccc;
+      border-radius: 16px;
+      padding: 10px;
+      text-align: center;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .card img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 12px;
+    }
+
+    .card h3 {
+      font-size: 16px;
+      margin: 10px 0 5px;
+    }
+
+    .card p {
+      font-size: 12px;
+      color: #555;
+    }
+    
+  </style>
+</head>
+<body>
+
+  <div class="navbar">
+    <img src="7 مايو 2025، 01_16_02 م.png" alt="شعار وصل" class="logo">
+    <div class="nav-links">
+      <a href="home.html">الرئيسية</a>
+      <a href="search.html" class="active">اعلان/بحث عن المفقودات</a>
+      <a href="report.html">الإبلاغ عن المفقودات</a>
+    </div>
+    <a href="project.html" class="logout">تسجيل الخروج</a>
+  </div>
+
+  <div class="search-container">
+    <input type="text" id="searchInput" placeholder="ابحث باسم الغرض...">
+  </div>
+
+  <div class="filters">
+    <button class="filter-btn active" data-category="all">الكل</button>
+    <button class="filter-btn" data-category="الكترونية">أجهزة إلكترونية</button>
+    <button class="filter-btn" data-category="شخصية">مستلزمات شخصية</button>
+    <button class="filter-btn" data-category="عيابات">العيابات</button>
+  </div>
+
+  <div class="card-container" id="cardContainer">
+    <!-- بطاقة 1 -->
+    <div class="card" data-category="شخصية">
+      <img src="5825800649860828360.jpg" alt="حقيبة">
+      <h3>حقيبة يد</h3>
+      <p>مستلزمات شخصية - بوابة 1 - 5 مايو 2025</p>
+    </div>
+
+    <!-- بطاقة 2 -->
+    <div class="card" data-category="الكترونية">
+      <img src="5825800649860828362.jpg" alt="ايباد">
+      <h3>ايباد</h3>
+      <p>أجهزة إلكترونية - قاعة المحاضرات 201 - 6 مايو 2025</p>
+    </div>
+
+    <!-- بطاقة 3 -->
+    <div class="card" data-category="شخصية">
+      <img src="5825800649860828359.jpg" alt="ميدالية">
+      <h3>ميدالية سبايدرمان</h3>
+      <p>مستلزمات شخصية - مبنى Y - 6 مايو 2025</p>
+    </div>
+
+    <!-- بطاقة 4 -->
+    <div class="card" data-category="شخصية">
+      <img src="5825800649860828361.jpg" alt="ساعة">
+      <h3>ساعة يد</h3>
+      <p>مستلزمات شخصية - السور الخارجي - 5 مايو 2025</p>
+    </div>
+  </div>
+
+  <script>
+    const searchInput = document.getElementById("searchInput");
+    const filterButtons = document.querySelectorAll(".filter-btn");
+    const cards = document.querySelectorAll(".card");
+
+    // البحث بالكلمة
+    searchInput.addEventListener("keyup", function () {
+      filterCards();
+    });
+
+    // الفلترة حسب التصنيف
+    filterButtons.forEach(button => {
+      button.addEventListener("click", function () {
+        document.querySelector(".filter-btn.active").classList.remove("active");
+        this.classList.add("active");
+        filterCards();
+      });
+    });
+
+    function filterCards() {
+      const keyword = searchInput.value.toLowerCase();
+      const selectedCategory = document.querySelector(".filter-btn.active").dataset.category;
+
+      cards.forEach(card => {
+        const cardCategory = card.dataset.category;
+        const cardText = card.innerText.toLowerCase();
+
+        const matchesCategory = selectedCategory === "all" || selectedCategory === cardCategory;
+        const matchesSearch = cardText.includes(keyword);
+
+        if (matchesCategory && matchesSearch) {
+          card.style.display = "block";
+        } else {
+          card.style.display = "none";
+        }
+      });
+    }
+  </script>
+
+</body>
+</html>
